@@ -1,26 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { BoardTypes } from "../interfaces";
+import { TILE_SIZE } from "../constants/constants";
 import Tile from "../components/Tile";
 
-const boardPositions = [
-  [true, true, true, true],
-  [true, false, true, true],
-  [true, true, false, true],
-  [true, true, true, true],
-];
-
-const Board = () => (
+const Board = ({ positions }) => (
   <StyledBoard>
-    {boardPositions.map((row, rowIndex) =>
-      row.map((hasTile, columnIndex) => {
-        if (hasTile) {
-          return (
-            <Tile
-              id={`${rowIndex}-${columnIndex}`}
-              row={rowIndex}
-              column={columnIndex}
-            />
-          );
+    {positions.map((row, rowIndex) =>
+      row.map((id, columnIndex) => {
+        if (id) {
+          return <Tile key={id} id={id} row={rowIndex} column={columnIndex} />;
         }
       })
     )}
@@ -29,6 +18,8 @@ const Board = () => (
 
 const StyledBoard = styled.main`
   position: relative;
+  width: calc(${TILE_SIZE} * 4);
+  height: calc(${TILE_SIZE} * 4);
 `;
 
 export default Board;

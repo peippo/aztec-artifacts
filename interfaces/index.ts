@@ -9,7 +9,15 @@ export type User = {
   name: string;
 };
 
-export type TileInterface = {
+export interface BoardTypes {
+  [index: number]: BoardRow;
+}
+
+export interface BoardRow {
+  [index: number]: number | undefined;
+}
+
+export type TileTypes = {
   id: string;
   row: number;
   column: number;
