@@ -1,67 +1,81 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 import Board from "../components/Board";
-import { BoardTypes, BoardRow } from "../interfaces";
+import { BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS } from "../constants/constants";
 
 const IndexPage = () => {
-  const [positions, setPositions] = useState<BoardRow[]>([
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, undefined, undefined],
+  const [positions, setPositions] = useState<number[]>([
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    undefined,
+    undefined,
   ]);
 
   const randomFromArr = (array: Array<any>) =>
-    Math.floor(Math.random() * array.length);
+    array[Math.floor(Math.random() * array.length)];
 
-  const moveRandom = (positions: Array<Array<number | undefined>>) => {
-    const getRandomRowIndex = () => randomFromArr(positions);
-    let rowIndex = getRandomRowIndex();
+  const moveRandom = (positions: Array<number | undefined>) => {
+    const startDestinationSearchFromEnd = Math.random() < 0.5;
+    let destinationIndex: number;
+    let sourceIndices: Array<number> = [];
 
-    let rowWithSpace = positions[rowIndex];
-
-    while (!rowWithSpace.includes(undefined)) {
-      rowIndex = getRandomRowIndex();
-      rowWithSpace = positions[rowIndex];
+    if (startDestinationSearchFromEnd) {
+      destinationIndex = positions.lastIndexOf(undefined);
+    } else {
+      destinationIndex = positions.indexOf(undefined);
     }
 
-    // What if we have two free spaces on one row?
-    const columnIndex = rowWithSpace.indexOf(undefined);
-
-    let newRowIndex: number;
-    let newColumnIndex: number;
-
-    const getNewPosition = () => {
-      const possibleNewRows = [
-        Math.max(0, rowIndex - 1),
-        rowIndex,
-        Math.min(positions.length - 1, rowIndex + 1),
-      ];
-
-      newRowIndex = possibleNewRows[randomFromArr(possibleNewRows)];
-
-      const possibleNewColumns =
-        newRowIndex === rowIndex
-          ? [Math.max(0, columnIndex - 1), Math.min(3, columnIndex + 1)]
-          : [columnIndex];
-
-      newColumnIndex = possibleNewColumns[randomFromArr(possibleNewColumns)];
-    };
-
-    getNewPosition();
-
-    while (!positions[newRowIndex][newColumnIndex]) {
-      getNewPosition();
+    // Left from empty space
+    if (
+      destinationIndex % BOARD_COLUMNS !== 0 &&
+      positions[destinationIndex - 1] !== undefined
+    ) {
+      sourceIndices.push(destinationIndex - 1);
     }
+
+    // Right from empty space
+    if (
+      destinationIndex % BOARD_COLUMNS !== BOARD_COLUMNS - 1 &&
+      positions[destinationIndex + 1] !== undefined
+    ) {
+      sourceIndices.push(destinationIndex + 1);
+    }
+
+    // Up from empty space
+    if (
+      destinationIndex >= BOARD_ROWS &&
+      positions[destinationIndex - BOARD_COLUMNS] !== undefined
+    ) {
+      sourceIndices.push(destinationIndex - BOARD_COLUMNS);
+    }
+
+    // Down from empty space
+    if (
+      destinationIndex <= BOARD_CELLS - BOARD_COLUMNS &&
+      positions[destinationIndex + BOARD_COLUMNS] !== undefined
+    ) {
+      sourceIndices.push(destinationIndex + BOARD_COLUMNS);
+    }
+
+    const sourceIndex = randomFromArr(sourceIndices);
 
     const newPositions = [...positions];
 
-    [
-      newPositions[rowIndex][columnIndex],
-      newPositions[newRowIndex][newColumnIndex],
-    ] = [
-      newPositions[newRowIndex][newColumnIndex],
-      newPositions[rowIndex][columnIndex],
+    [newPositions[destinationIndex], newPositions[sourceIndex]] = [
+      newPositions[sourceIndex],
+      newPositions[destinationIndex],
     ];
 
     setPositions(newPositions);

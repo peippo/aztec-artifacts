@@ -9,15 +9,19 @@ export type User = {
   name: string;
 };
 
-export interface BoardTypes {
-  [index: number]: BoardRow;
-}
-
-export interface BoardRow {
+export type BoardPositions = {
   [index: number]: number | undefined;
-}
+};
 
-export type TileTypes = {
+export type BoardType = {
+  positions: BoardPositions[];
+};
+
+// export interface BoardRow {
+//   [index: number]: number | undefined;
+// }
+
+export type TileType = {
   id: string;
   row: number;
   column: number;

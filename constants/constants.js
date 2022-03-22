@@ -1,1 +1,6 @@
-export const TILE_SIZE = "100px";
+const TILE_SIZE = "100px";
+const BOARD_COLUMNS = 4;
+const BOARD_ROWS = 4;
+const BOARD_CELLS = BOARD_COLUMNS * BOARD_ROWS;
+
+export { TILE_SIZE, BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS };
