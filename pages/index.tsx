@@ -2,8 +2,12 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import Board from "../components/Board";
 import { BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS } from "../constants/constants";
+import NewGameButton from "../components/NewGameButton";
+
+import useStore from "../hooks/useStore";
 
 const IndexPage = () => {
+  const gameId = useStore((state) => state.gameId);
   const [positions, setPositions] = useState<number[]>([
     0,
     1,
@@ -83,8 +87,9 @@ const IndexPage = () => {
 
   return (
     <Layout title="Concentration">
-      <Board positions={positions} />
+      {gameId && <Board positions={positions} />}
       <button onClick={() => moveRandom(positions)}>Move random tile</button>
+      <NewGameButton />
     </Layout>
   );
 };
