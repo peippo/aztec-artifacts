@@ -3,6 +3,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const useStore = create((set, get) => ({
   gameId: "",
+  currentTurn: 0,
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
@@ -28,10 +29,11 @@ const useStore = create((set, get) => ({
       `${API_BASE_URL}/flip?gameId=${gameId}${tileParams}`
     );
     response = await response.json();
-    const { revealedTiles, isMatch, isFirst } = response;
+    const { revealedTiles, isMatch, isFirst, turn } = response;
 
     set((state) => ({
       revealedTiles: [...revealedTiles, ...state.revealedTiles],
+      currentTurn: turn,
     }));
 
     if (isMatch) {

@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Board from "../components/Board";
 import { BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS } from "../constants/constants";
 import NewGameButton from "../components/NewGameButton";
+import TurnIndicator from "../components/TurnIndicator";
 
 import useStore from "../hooks/useStore";
 
@@ -90,6 +91,7 @@ const IndexPage = () => {
       {gameId && <Board positions={positions} />}
       <button onClick={() => moveRandom(positions)}>Move random tile</button>
       <NewGameButton />
+      <TurnIndicator />
     </Layout>
   );
 };
