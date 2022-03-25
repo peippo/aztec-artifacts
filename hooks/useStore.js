@@ -7,18 +7,32 @@ const useStore = create((set, get) => ({
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
+  isBoardActive: false,
 
   startNewGame: async () => {
     let response = await fetch(`${API_BASE_URL}/new`);
     response = await response.json();
-    set({ gameId: response.id });
+    const { id } = response;
+    set({
+      gameId: id,
+      currentTurn: 1,
+      isBoardActive: true,
+      currentTileIds: [],
+      revealedTiles: [],
+      matchedTiles: [],
+    });
   },
 
   isRevealed: (id) => get().currentTileIds.includes(id),
   isMatched: (id) => get().matchedTiles.some((tile) => tile.id === id),
 
   checkTile: async (id) => {
-    set((state) => ({ currentTileIds: [id, ...state.currentTileIds] }));
+    if (!get().isBoardActive) return;
+
+    set((state) => ({
+      currentTileIds: [id, ...state.currentTileIds],
+      isBoardActive: false,
+    }));
 
     const gameId = get().gameId;
     const tileParams = get()
@@ -44,9 +58,16 @@ const useStore = create((set, get) => ({
 
     if (!isFirst) {
       setTimeout(() => {
-        set(() => ({ currentTileIds: [] }));
-        set(() => ({ revealedTiles: [] }));
+        set(() => ({
+          currentTileIds: [],
+          revealedTiles: [],
+          isBoardActive: true,
+        }));
       }, 1000);
+    } else {
+      set(() => ({
+        isBoardActive: true,
+      }));
     }
   },
 }));
