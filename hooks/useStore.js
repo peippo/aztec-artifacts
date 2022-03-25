@@ -1,5 +1,7 @@
 import create from "zustand";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+import { INITIAL_BOARD_POSITIONS } from "../constants/constants";
+import { moveRandomPosition } from "../utils/utils";
 
 const useStore = create((set, get) => ({
   gameId: "",
@@ -7,6 +9,7 @@ const useStore = create((set, get) => ({
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
+  positions: INITIAL_BOARD_POSITIONS,
   isBoardActive: false,
 
   startNewGame: async () => {
@@ -22,10 +25,12 @@ const useStore = create((set, get) => ({
       matchedTiles: [],
     });
   },
-
   isRevealed: (id) => get().currentTileIds.includes(id),
   isMatched: (id) => get().matchedTiles.some((tile) => tile.id === id),
-
+  moveRandom: () =>
+    set(() => ({
+      positions: moveRandomPosition(get().positions),
+    })),
   checkTile: async (id) => {
     if (!get().isBoardActive) return;
 

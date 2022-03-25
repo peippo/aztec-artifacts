@@ -2,5 +2,29 @@ const TILE_SIZE = "100px";
 const BOARD_COLUMNS = 4;
 const BOARD_ROWS = 4;
 const BOARD_CELLS = BOARD_COLUMNS * BOARD_ROWS;
+const INITIAL_BOARD_POSITIONS = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  undefined,
+  undefined,
+];
 
-export { TILE_SIZE, BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS };
+export {
+  TILE_SIZE,
+  BOARD_COLUMNS,
+  BOARD_ROWS,
+  BOARD_CELLS,
+  INITIAL_BOARD_POSITIONS,
+};
