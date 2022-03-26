@@ -25,7 +25,7 @@ const useStore = create((set, get) => ({
       matchedTiles: [],
     });
   },
-  isRevealed: (id) => get().currentTileIds.includes(id),
+  isRevealed: (id) => get().revealedTiles.some((tile) => tile.id === id),
   isMatched: (id) => get().matchedTiles.some((tile) => tile.id === id),
   moveRandom: () =>
     set(() => ({

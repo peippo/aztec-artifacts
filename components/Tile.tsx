@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { TileType } from "../interfaces";
 import { TILE_SIZE } from "../constants/constants";
 import useStore from "../hooks/useStore";
+import TileSymbol from "./TileSymbol";
 
 const Tile = ({ id, row, column }: TileType) => {
   const checkTile = useStore((state) => state.checkTile);
@@ -12,17 +13,19 @@ const Tile = ({ id, row, column }: TileType) => {
   const isMatched = matchedTiles.some((tile) => tile.id === id);
 
   if (isMatched) {
-    const symbol = matchedTiles.find((tile) => tile.id === id).symbol;
+    const { symbol } = matchedTiles.find((tile) => tile.id === id);
 
     return (
       <StyledTile id={id} row={row} column={column}>
-        {symbol}
+        <TileSymbol symbol={symbol} />
       </StyledTile>
     );
   } else if (isRevealed) {
+    const { symbol } = revealedTiles.find((tile) => tile.id === id);
+
     return (
       <StyledTile id={id} row={row} column={column}>
-        {revealedTiles.find((tile) => tile.id === id)?.symbol}
+        <TileSymbol symbol={symbol} />
       </StyledTile>
     );
   } else {
@@ -46,6 +49,10 @@ const StyledTile = styled.button<TileType>`
   width: ${TILE_SIZE};
   height: ${TILE_SIZE};
   transition: all 0.25s;
+
+  svg {
+    max-height: 80%;
+  }
 `;
 
 export default Tile;
