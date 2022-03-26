@@ -21,6 +21,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
 
 const GlobalStyle = createGlobalStyle`
 	html {
+    font-family: 'Rubik', sans-serif;
 		box-sizing: border-box;
 	}
 
