@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
+import Logo from "../components/Logo";
 import Board from "../components/Board";
 import NewGameButton from "../components/NewGameButton";
 import TurnIndicator from "../components/TurnIndicator";
@@ -12,6 +13,7 @@ const IndexPage = () => {
 
   return (
     <Layout title="Concentration">
+      <Logo />
       {gameId && <Board positions={positions} />}
       <button onClick={() => moveRandom()}>Move random tile</button>
       <NewGameButton />
