@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BOARD_COLUMNS, TILE_SIZE } from "../constants/constants";
+import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "../constants/constants";
 import Tile from "../components/Tile";
 
 const Board = ({ positions }) => {
@@ -22,8 +22,18 @@ const Board = ({ positions }) => {
 
 const StyledBoard = styled.main`
   position: relative;
-  width: calc(${TILE_SIZE} * 4);
-  height: calc(${TILE_SIZE} * 4);
+  width: calc(${TILE_SIZE["small"]} * 4);
+  height: calc(${TILE_SIZE["small"]} * 4);
+
+  @media (min-width: ${BREAKPOINT["medium"]}) {
+    width: calc(${TILE_SIZE["medium"]} * 4);
+    height: calc(${TILE_SIZE["medium"]} * 4);
+  }
+
+  @media (min-width: ${BREAKPOINT["large"]}) {
+    width: calc(${TILE_SIZE["large"]} * 4);
+    height: calc(${TILE_SIZE["large"]} * 4);
+  }
 `;
 
 export default Board;
