@@ -1,13 +1,14 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
+import Vines from "./Vines";
 
 type Props = {
   children?: ReactNode;
   title?: string;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => (
+const Layout = ({ children, title = "Aztec Artifacts" }: Props) => (
   <>
     <Head>
       <title>{title}</title>
@@ -16,6 +17,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
     </Head>
     <GlobalStyle />
     {children}
+    <Vines />
   </>
 );
 
@@ -30,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
 	html {
     font-family: 'Rubik', sans-serif;
 		box-sizing: border-box;
-    height: 100%;
 	}
 
 	*, *:before, *:after {
@@ -38,7 +39,8 @@ const GlobalStyle = createGlobalStyle`
 	}
 
   body {
-    height: 100%;
+    margin: 0;
+    padding: 50px 0;
     display: flex;
     justify-content: center;
     align-items: center;

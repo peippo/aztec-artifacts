@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import Logo from "../components/Logo";
@@ -12,7 +11,7 @@ const IndexPage = () => {
   const positions = useStore((state) => state.positions);
 
   return (
-    <Layout title="Concentration">
+    <Layout>
       <Header>
         <Logo />
         <TurnIndicator />
