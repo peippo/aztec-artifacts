@@ -108,7 +108,7 @@ const StyledTile = styled.button<TileType>`
   &:hover {
     opacity: 0.85;
     transform: scale(0.98);
-    cursor: pointer;
+    cursor: var(--cursor-url), pointer;
   }
 `;
 

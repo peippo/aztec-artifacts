@@ -1,11 +1,14 @@
 import * as React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import { BREAKPOINT } from "../constants/constants";
 
 const Logo = () => (
-  <Heading>
-    <Main>Aztec</Main> <Sub>Artifacts</Sub>
-  </Heading>
+  <Link href="/">
+    <Heading>
+      <Main>Aztec</Main> <Sub>Artifacts</Sub>
+    </Heading>
+  </Link>
 );
 
 const Heading = styled.h1`
@@ -13,6 +16,11 @@ const Heading = styled.h1`
   text-transform: uppercase;
   line-height: 1;
   font-size: 1rem;
+  transition: all 0.25s;
+
+  &:hover {
+    opacity: 0.9;
+  }
 
   @media (min-width: ${BREAKPOINT["medium"]}) {
     text-align: center;

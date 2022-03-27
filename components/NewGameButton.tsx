@@ -1,15 +1,15 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
-import useStore from "../hooks/useStore";
 import { TILE_SIZE, BREAKPOINT } from "../constants/constants";
 
 const NewGameButton = () => {
-  const startNewGame = useStore((state) => state.startNewGame);
-
   return (
-    <StyledButton onClick={startNewGame}>
-      Start the <LargeText>excavation</LargeText>
-    </StyledButton>
+    <Link href="/game">
+      <StyledButton>
+        Start the <LargeText>excavation</LargeText>
+      </StyledButton>
+    </Link>
   );
 };
 

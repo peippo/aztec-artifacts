@@ -3,14 +3,18 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 import { INITIAL_BOARD_POSITIONS } from "../constants/constants";
 import { moveRandomPosition, shuffleArray } from "../utils/utils";
 
-const useStore = create((set, get) => ({
+const initialSettings = {
   gameId: "",
   currentTurn: 0,
+  isBoardActive: false,
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
   positions: INITIAL_BOARD_POSITIONS,
-  isBoardActive: false,
+};
+
+const useStore = create((set, get) => ({
+  ...initialSettings,
 
   startNewGame: async () => {
     let response = await fetch(`${API_BASE_URL}/new`);
@@ -23,7 +27,12 @@ const useStore = create((set, get) => ({
       currentTileIds: [],
       revealedTiles: [],
       matchedTiles: [],
-      positions: shuffleArray(INITIAL_BOARD_POSITIONS),
+      positions: shuffleArray([...INITIAL_BOARD_POSITIONS]),
+    });
+  },
+  resetGame: () => {
+    set({
+      ...initialSettings,
     });
   },
   isRevealed: (id) => get().revealedTiles.some((tile) => tile.id === id),

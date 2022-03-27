@@ -1,7 +1,10 @@
 import React, { ReactNode } from "react";
+import styled from "styled-components";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
 import Vines from "./Vines";
+import Logo from "../components/Logo";
+import TurnIndicator from "../components/TurnIndicator";
 
 type Props = {
   children?: ReactNode;
@@ -16,10 +19,20 @@ const Layout = ({ children, title = "Aztec Artifacts" }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <GlobalStyle />
+
+    <Header>
+      <Logo />
+      <TurnIndicator />
+    </Header>
+
     {children}
     <Vines />
   </>
 );
+
+const Header = styled.header`
+  position: relative;
+`;
 
 const GlobalStyle = createGlobalStyle`
   :root {
