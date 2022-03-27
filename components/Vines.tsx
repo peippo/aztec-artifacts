@@ -20,7 +20,7 @@ const HangingVine = styled.div`
   width: 50%;
   max-width: 700px;
   height: 100%;
-  background-image: url("vine-1.png");
+  background-image: url("vine-1.webp");
   background-size: contain;
   background-repeat: no-repeat;
   filter: brightness(0.5) sepia(0.3) blur(2px);
@@ -34,11 +34,15 @@ const BackgroundVine = styled.div`
   width: 100%;
   height: 100%;
   background-image: url("vine-0.png");
-  background-size: contain;
+  background-size: cover;
   background-position: 80% center;
   background-repeat: no-repeat;
   filter: brightness(0.6) sepia(0.5);
   z-index: -3;
+
+  @media (min-width: ${BREAKPOINT["large"]}) {
+    background-size: contain;
+  }
 `;
 
 const LightsBackground = styled.div`
