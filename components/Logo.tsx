@@ -10,12 +10,13 @@ const Logo = () => (
 
 const Heading = styled.h1`
   margin: 0 auto 2rem;
-  text-align: center;
   text-transform: uppercase;
   line-height: 1;
   font-size: 1rem;
 
   @media (min-width: ${BREAKPOINT["medium"]}) {
+    text-align: center;
+
     font-size: 1.25rem;
   }
 

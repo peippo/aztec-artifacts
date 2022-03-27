@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 import Layout from "../components/Layout";
 import Logo from "../components/Logo";
 import Board from "../components/Board";
@@ -9,17 +10,21 @@ import useStore from "../hooks/useStore";
 const IndexPage = () => {
   const gameId = useStore((state) => state.gameId);
   const positions = useStore((state) => state.positions);
-  const moveRandom = useStore((state) => state.moveRandom);
 
   return (
     <Layout title="Concentration">
-      <Logo />
+      <Header>
+        <Logo />
+        <TurnIndicator />
+      </Header>
       {gameId && <Board positions={positions} />}
-      <button onClick={() => moveRandom()}>Move random tile</button>
       <NewGameButton />
-      <TurnIndicator />
     </Layout>
   );
 };
+
+const Header = styled.header`
+  position: relative;
+`;
 
 export default IndexPage;
