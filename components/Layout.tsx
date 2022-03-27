@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     --color-yellow: #f2c405;
     --color-white: #fff9db;
     --font-family: 'Rubik', sans-serif;
+    --cursor-url: url("cursor.png");
   }
 
 	html {
@@ -46,6 +47,7 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
     background-image: url("background.png");
+    cursor: var(--cursor-url), auto;
   }
 `;
 

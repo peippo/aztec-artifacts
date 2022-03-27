@@ -50,7 +50,7 @@ const StyledButton = styled.button`
   &:focus {
     background-color: var(--color-yellow);
     color: var(--color-dark-blue);
-    cursor: pointer;
+    cursor: var(--cursor-url), pointer;
   }
 
   &:focus {
