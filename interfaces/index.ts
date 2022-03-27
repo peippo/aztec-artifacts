@@ -25,4 +25,5 @@ export type TileType = {
   id: string;
   row: number;
   column: number;
+  status: string | null;
 };

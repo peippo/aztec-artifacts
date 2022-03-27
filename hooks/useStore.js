@@ -56,12 +56,18 @@ const useStore = create((set, get) => ({
     }));
 
     if (isMatch) {
-      set((state) => ({
-        matchedTiles: [...revealedTiles, ...state.matchedTiles],
-      }));
+      setTimeout(() => {
+        set((state) => ({
+          matchedTiles: [...revealedTiles, ...state.matchedTiles],
+        }));
+      }, 1000);
     }
 
-    if (!isFirst) {
+    if (isFirst) {
+      set(() => ({
+        isBoardActive: true,
+      }));
+    } else {
       setTimeout(() => {
         set(() => ({
           currentTileIds: [],
@@ -69,10 +75,9 @@ const useStore = create((set, get) => ({
           isBoardActive: true,
         }));
       }, 1000);
-    } else {
-      set(() => ({
-        isBoardActive: true,
-      }));
+      setTimeout(() => {
+        get().moveRandom();
+      }, 1500);
     }
   },
 }));
