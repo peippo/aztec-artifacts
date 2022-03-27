@@ -82,12 +82,16 @@ const useStore = create((set, get) => ({
         set(() => ({
           currentTileIds: [],
           revealedTiles: [],
-          isBoardActive: true,
         }));
-      }, 1000);
+      }, 1500);
       setTimeout(() => {
         get().moveRandom();
-      }, 1500);
+      }, 1750);
+      setTimeout(() => {
+        set(() => ({
+          isBoardActive: true,
+        }));
+      }, 2000);
     }
   },
 }));
