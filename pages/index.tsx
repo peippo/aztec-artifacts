@@ -1,29 +1,26 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import Layout from "../components/Layout";
 import Board from "../components/Board";
 import NewGameButton from "../components/NewGameButton";
 import useStore from "../hooks/useStore";
-import { INITIAL_BOARD_POSITIONS } from "../constants/constants";
 
 const IndexPage = () => {
   const resetGame = useStore((state) => state.resetGame);
+  const positions = useStore((state) => state.positions);
 
   useEffect(() => {
     resetGame();
   }, []);
 
   return (
-    <Layout>
-      <BoardWrapper>
-        <Board positions={INITIAL_BOARD_POSITIONS} />
-        <NewGameButton />
-      </BoardWrapper>
-    </Layout>
+    <Wrapper>
+      <Board positions={positions} />
+      <NewGameButton />
+    </Wrapper>
   );
 };
 
-const BoardWrapper = styled.div`
+const Wrapper = styled.div`
   position: relative;
 `;
 

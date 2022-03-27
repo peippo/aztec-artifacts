@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Layout from "../components/Layout";
 import Board from "../components/Board";
 import useStore from "../hooks/useStore";
 
@@ -11,11 +10,7 @@ const GamePage = () => {
     startNewGame();
   }, []);
 
-  return (
-    <Layout>
-      <Board positions={positions} />
-    </Layout>
-  );
+  return <Board positions={positions} />;
 };
 
 export default GamePage;
