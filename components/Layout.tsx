@@ -27,10 +27,11 @@ const GlobalStyle = createGlobalStyle`
     --color-cyan: #28e0b3;
     --color-yellow: #f2c405;
     --color-white: #fff9db;
+    --font-family: 'Rubik', sans-serif;
   }
 
 	html {
-    font-family: 'Rubik', sans-serif;
+    font-family: var(--font-family);
 		box-sizing: border-box;
 	}
 

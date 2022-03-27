@@ -9,7 +9,7 @@ const useStore = create((set, get) => ({
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
-  positions: shuffleArray(INITIAL_BOARD_POSITIONS),
+  positions: INITIAL_BOARD_POSITIONS,
   isBoardActive: false,
 
   startNewGame: async () => {

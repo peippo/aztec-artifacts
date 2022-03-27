@@ -16,13 +16,19 @@ const IndexPage = () => {
         <Logo />
         <TurnIndicator />
       </Header>
-      {gameId && <Board positions={positions} />}
-      <NewGameButton />
+      <BoardWrapper>
+        <Board positions={positions} />
+        {!gameId && <NewGameButton />}
+      </BoardWrapper>
     </Layout>
   );
 };
 
 const Header = styled.header`
+  position: relative;
+`;
+
+const BoardWrapper = styled.div`
   position: relative;
 `;
 

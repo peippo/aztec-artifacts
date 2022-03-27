@@ -1,6 +1,6 @@
 const BREAKPOINT = {
   medium: "600px",
-  large: "1000px",
+  large: "800px",
 };
 const TILE_SIZE = {
   small: "80px",
@@ -16,6 +16,8 @@ const INITIAL_BOARD_POSITIONS = [
   2,
   3,
   4,
+  undefined,
+  undefined,
   5,
   6,
   7,
@@ -25,8 +27,6 @@ const INITIAL_BOARD_POSITIONS = [
   11,
   12,
   13,
-  undefined,
-  undefined,
 ];
 
 export {
