@@ -51,29 +51,26 @@ const LightsBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -4;
+  z-index: 10;
   overflow: hidden;
+  pointer-events: none;
 `;
 
 const lightAnimation1 = keyframes`
     0% {
-        margin-top: -4rem;
-        text-indent: -2rem;
+        transform: translate3d(-2rem, -5rem, 0);
     }
     100% {
-        margin-top: 0;
-        text-indent: 3rem;
+        transform: translate3d(3rem 0, 0);
     }
 `;
 
 const lightAnimation2 = keyframes`
     0% {
-        margin-top: -3rem;
-        text-indent: -3rempx;
+        transform: translate3d(-3rem, -3rem, 0);
     }
     100% {
-        margin-top: 0;
-        text-indent: 3rem;
+        transform: translate3d(4rem, 0, 0);
     }
 `;
 
@@ -81,7 +78,7 @@ const LightShape = styled.p`
   margin: 0;
   position: absolute;
   color: transparent;
-  text-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
   font-size: 768px;
   mix-blend-mode: multiply;
   animation: 5s ease-in-out infinite alternate ${lightAnimation2};
@@ -94,7 +91,7 @@ const LightShape = styled.p`
 
 const LightShape2 = styled(LightShape)`
   left: 30%;
-  text-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
   animation: 3s ease-in-out infinite alternate ${lightAnimation1};
 `;
 
