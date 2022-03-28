@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import { TransitionStatus } from "react-transition-group/Transition";
+import useStore from "../hooks/useStore";
 import bird from "../assets/images/symbol-bird.svg";
 import face from "../assets/images/symbol-face.svg";
 import lizard from "../assets/images/symbol-lizard.svg";
@@ -9,7 +10,13 @@ import pyramid from "../assets/images/symbol-pyramid.svg";
 import snake from "../assets/images/symbol-snake.svg";
 import turtle from "../assets/images/symbol-turtle.svg";
 
-const TileSymbol = ({ symbol, status, isMatched }) => {
+const TileSymbol = ({ id, status, isMatched }) => {
+  const matchedTiles = useStore((state) => state.matchedTiles);
+  const revealedTiles = useStore((state) => state.revealedTiles);
+  const { symbol } = isMatched
+    ? matchedTiles.find((tile) => tile.id === id) || {}
+    : revealedTiles.find((tile) => tile.id === id) || {};
+
   const symbols = {
     A: bird(),
     B: face(),
@@ -19,6 +26,8 @@ const TileSymbol = ({ symbol, status, isMatched }) => {
     F: snake(),
     G: turtle(),
   };
+
+  if (!symbol) return <></>;
 
   return (
     <StyledSymbol status={status} isMatched={isMatched}>
@@ -31,6 +40,9 @@ const StyledSymbol = styled.span<{
   status: TransitionStatus;
   isMatched: boolean;
 }>`
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+
   svg {
     filter: drop-shadow(0 0 0 rgb(0 0 0 / 0));
     transition: filter 0.33s;
@@ -42,6 +54,10 @@ const StyledSymbol = styled.span<{
         (status === "entering" || status === "entered") &&
         css`
           animation-name: ${matchedInAnimation};
+
+          svg {
+            filter: drop-shadow(-1px -2px 2px rgb(0 0 0 / 0.4));
+          }
         `
       );
     } else
@@ -52,18 +68,6 @@ const StyledSymbol = styled.span<{
         `
       );
   }}
-
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-
-  ${({ status, isMatched }) =>
-    status === "entered" &&
-    isMatched &&
-    css`
-      svg {
-        filter: drop-shadow(-1px -2px 2px rgb(0 0 0 / 0.4));
-      }
-    `}
 `;
 
 const inAnimation = keyframes`
@@ -73,9 +77,6 @@ const inAnimation = keyframes`
 
   40% {
     opacity: 0;
-  }
-
-  80% {
   }
   
   100% {

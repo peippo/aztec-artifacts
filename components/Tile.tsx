@@ -8,38 +8,17 @@ import { Transition } from "react-transition-group";
 import { TransitionStatus } from "react-transition-group/Transition";
 
 const Tile = ({ id, row, column }) => {
-  const checkTile = useStore((state) => state.checkTile);
+  const handleCheckTile = useStore((state) => state.checkTile);
   const isRevealed = useStore((state) => state.isRevealed(id));
-  const revealedTiles = useStore((state) => state.revealedTiles);
-  const matchedTiles = useStore((state) => state.matchedTiles);
-  const isMatched = matchedTiles.some((tile) => tile.id === id);
+  const isMatched = useStore((state) => state.isMatched(id));
 
-  if (isMatched) {
-    const { symbol } = matchedTiles.find((tile) => tile.id === id);
-
-    return (
-      <MatchedTile id={id} row={row} column={column} status={null}>
-        <Transition
-          appear={true}
-          in={true}
-          timeout={{
-            enter: 1000,
-          }}
-        >
-          {(status: TransitionStatus) => (
-            <TileSymbol symbol={symbol} status={status} isMatched={true} />
-          )}
-        </Transition>
-      </MatchedTile>
-    );
-  } else if (isRevealed) {
-    const { symbol } = revealedTiles.find((tile) => tile.id === id);
-
-    return (
+  return (
+    <>
+      {/* Revealed or matched tile */}
       <Transition
-        key={id}
-        appear={true}
-        in={true}
+        key={`flipped-${id}`}
+        in={isRevealed || isMatched}
+        unmountOnExit
         timeout={{
           enter: 500,
         }}
@@ -47,31 +26,33 @@ const Tile = ({ id, row, column }) => {
         {(status: TransitionStatus) => (
           <RevealedTile id={id} row={row} column={column} status={status}>
             <Transition
-              appear={true}
-              in={true}
+              in={isRevealed || isMatched}
               timeout={{
                 enter: 1000,
               }}
             >
               {(status: TransitionStatus) => (
-                <TileSymbol symbol={symbol} status={status} isMatched={false} />
+                <TileSymbol id={id} status={status} isMatched={isMatched} />
               )}
             </Transition>
           </RevealedTile>
         )}
       </Transition>
-    );
-  } else {
-    return (
-      <StyledTile
-        id={id}
-        row={row}
-        column={column}
-        onClick={() => checkTile(id)}
-        status={null}
-      ></StyledTile>
-    );
-  }
+
+      {/* Normal tile */}
+      <Transition key={id} in={!isRevealed && !isMatched} unmountOnExit>
+        {(status: TransitionStatus) => (
+          <StyledTile
+            id={id}
+            row={row}
+            column={column}
+            onClick={() => handleCheckTile(id)}
+            status={status}
+          ></StyledTile>
+        )}
+      </Transition>
+    </>
+  );
 };
 
 const StyledTile = styled.button<TileType>`
@@ -132,14 +113,6 @@ const RevealedTile = styled(StyledTile)<{ status: TransitionStatus }>`
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
     `}
-`;
-
-const MatchedTile = styled(StyledTile)`
-  &:hover {
-    opacity: inherit;
-    transform: inherit;
-    cursor: inherit;
-  }
 `;
 
 const revealInAnimation = keyframes`
