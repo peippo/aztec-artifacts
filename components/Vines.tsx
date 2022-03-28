@@ -17,7 +17,7 @@ const HangingVine = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 70%;
   max-width: 700px;
   height: 100%;
   background-image: url("vine-1.webp");

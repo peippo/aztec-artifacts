@@ -31,6 +31,7 @@ const StyledTurnIndicator = styled.p`
   font-size: 20px;
   border: 3px solid var(--color-cyan);
   border-radius: 1000px;
+  z-index: 15;
 
   @media (min-width: ${BREAKPOINT["medium"]}) {
     right: -30px;

@@ -32,6 +32,7 @@ const StyledButton = styled.button`
   margin: 0;
   font-family: var(--font-family);
   transition: all 0.25s;
+  z-index: 15;
 
   @media (min-width: ${BREAKPOINT["medium"]}) {
     top: calc(${TILE_SIZE["medium"]} * 1.2);
