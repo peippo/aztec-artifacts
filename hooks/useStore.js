@@ -10,6 +10,7 @@ const initialSettings = {
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
+  isFadingOutSymbol: false,
   positions: INITIAL_BOARD_POSITIONS,
 };
 
@@ -47,6 +48,7 @@ const useStore = create((set, get) => ({
     set((state) => ({
       currentTileIds: [id, ...state.currentTileIds],
       isBoardActive: false,
+      isFadingOutSymbol: false,
     }));
 
     const gameId = get().gameId;
@@ -80,18 +82,21 @@ const useStore = create((set, get) => ({
     } else {
       setTimeout(() => {
         set(() => ({
-          currentTileIds: [],
-          revealedTiles: [],
+          isFadingOutSymbol: !isMatch,
         }));
       }, 1500);
       setTimeout(() => {
+        set(() => ({
+          currentTileIds: [],
+          revealedTiles: [],
+        }));
         get().moveRandom();
-      }, 1750);
+      }, 2500);
       setTimeout(() => {
         set(() => ({
           isBoardActive: true,
         }));
-      }, 2000);
+      }, 2750);
     }
   },
 }));

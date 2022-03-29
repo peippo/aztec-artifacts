@@ -68,6 +68,13 @@ const StyledSymbol = styled.span<{
         `
       );
   }}
+
+  ${({ status }) =>
+    status === "exiting" &&
+    css`
+      animation-name: ${outAnimation};
+      animation-duration: 1s;
+    `}
 `;
 
 const inAnimation = keyframes`
@@ -81,6 +88,16 @@ const inAnimation = keyframes`
   
   100% {
     opacity: 1;
+  }
+`;
+
+const outAnimation = keyframes`
+  0% {
+    opacity: 1;
+  }
+  
+  100% {
+    opacity: 0;
   }
 `;
 

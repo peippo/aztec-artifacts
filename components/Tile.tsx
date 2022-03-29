@@ -11,6 +11,7 @@ const Tile = ({ id, row, column }) => {
   const handleCheckTile = useStore((state) => state.checkTile);
   const isRevealed = useStore((state) => state.isRevealed(id));
   const isMatched = useStore((state) => state.isMatched(id));
+  const isFadingOutSymbol = useStore((state) => state.isFadingOutSymbol);
 
   return (
     <>
@@ -19,18 +20,11 @@ const Tile = ({ id, row, column }) => {
         key={`flipped-${id}`}
         in={isRevealed || isMatched}
         unmountOnExit
-        timeout={{
-          enter: 500,
-        }}
+        timeout={500}
       >
         {(status: TransitionStatus) => (
           <RevealedTile id={id} row={row} column={column} status={status}>
-            <Transition
-              in={isRevealed || isMatched}
-              timeout={{
-                enter: 1000,
-              }}
-            >
+            <Transition in={isMatched || !isFadingOutSymbol} timeout={1000}>
               {(status: TransitionStatus) => (
                 <TileSymbol id={id} status={status} isMatched={isMatched} />
               )}
