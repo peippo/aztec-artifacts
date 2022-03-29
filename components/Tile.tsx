@@ -24,7 +24,10 @@ const Tile = ({ id, row, column }) => {
       >
         {(status: TransitionStatus) => (
           <RevealedTile id={id} row={row} column={column} status={status}>
-            <Transition in={isMatched || !isFadingOutSymbol} timeout={1000}>
+            <Transition
+              in={isMatched || !isFadingOutSymbol}
+              timeout={{ enter: 1000, exit: 1250 }}
+            >
               {(status: TransitionStatus) => (
                 <TileSymbol id={id} status={status} isMatched={isMatched} />
               )}
@@ -34,7 +37,12 @@ const Tile = ({ id, row, column }) => {
       </Transition>
 
       {/* Normal tile */}
-      <Transition key={id} in={!isRevealed && !isMatched} unmountOnExit>
+      <Transition
+        key={id}
+        in={!isRevealed && !isMatched}
+        timeout={0}
+        unmountOnExit
+      >
         {(status: TransitionStatus) => (
           <StyledTile
             id={id}

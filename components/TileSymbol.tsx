@@ -73,7 +73,7 @@ const StyledSymbol = styled.span<{
     status === "exiting" &&
     css`
       animation-name: ${outAnimation};
-      animation-duration: 1s;
+      animation-duration: 1.25s;
     `}
 `;
 
