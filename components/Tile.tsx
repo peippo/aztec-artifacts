@@ -7,7 +7,13 @@ import TileSymbol from "./TileSymbol";
 import { Transition } from "react-transition-group";
 import { TransitionStatus } from "react-transition-group/Transition";
 
-const Tile = ({ id, row, column }) => {
+type Props = {
+  id: number;
+  row: number;
+  column: number;
+};
+
+const Tile = ({ id, row, column }: Props) => {
   const handleCheckTile = useStore((state) => state.checkTile);
   const isRevealed = useStore((state) => state.isRevealed(id));
   const isMatched = useStore((state) => state.isMatched(id));
@@ -23,13 +29,13 @@ const Tile = ({ id, row, column }) => {
         timeout={500}
       >
         {(status: TransitionStatus) => (
-          <RevealedTile id={id} row={row} column={column} status={status}>
+          <RevealedTile tileId={id} row={row} column={column} status={status}>
             <Transition
               in={isMatched || !isFadingOutSymbol}
               timeout={{ enter: 1000, exit: 1250 }}
             >
               {(status: TransitionStatus) => (
-                <TileSymbol id={id} status={status} isMatched={isMatched} />
+                <TileSymbol tileId={id} status={status} isMatched={isMatched} />
               )}
             </Transition>
           </RevealedTile>
@@ -45,7 +51,7 @@ const Tile = ({ id, row, column }) => {
       >
         {(status: TransitionStatus) => (
           <StyledTile
-            id={id}
+            tileId={id}
             row={row}
             column={column}
             onClick={() => handleCheckTile(id)}

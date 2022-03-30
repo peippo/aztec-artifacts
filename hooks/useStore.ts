@@ -1,7 +1,8 @@
 import create from "zustand";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 import { INITIAL_BOARD_POSITIONS } from "../constants/constants";
 import { moveRandomPosition, shuffleArray } from "../utils/utils";
+import { GameStore, NewGameResponse, CheckResponse } from "../interfaces";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const initialSettings = {
   gameId: "",
@@ -14,13 +15,12 @@ const initialSettings = {
   positions: INITIAL_BOARD_POSITIONS,
 };
 
-const useStore = create((set, get) => ({
+const useStore = create<GameStore>((set, get) => ({
   ...initialSettings,
 
   startNewGame: async () => {
     let response = await fetch(`${API_BASE_URL}/new`);
-    response = await response.json();
-    const { id } = response;
+    const { id }: NewGameResponse = await response.json();
     set({
       gameId: id,
       currentTurn: 1,
@@ -59,8 +59,8 @@ const useStore = create((set, get) => ({
     let response = await fetch(
       `${API_BASE_URL}/flip?gameId=${gameId}${tileParams}`
     );
-    response = await response.json();
-    const { revealedTiles, isMatch, isFirst, turn } = response;
+    const { revealedTiles, isMatch, isFirst, turn }: CheckResponse =
+      await response.json();
 
     set((state) => ({
       revealedTiles: [...revealedTiles, ...state.revealedTiles],

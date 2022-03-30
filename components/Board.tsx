@@ -4,7 +4,11 @@ import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "../constants/constants";
 import useStore from "../hooks/useStore";
 import Tile from "../components/Tile";
 
-const Board = ({ positions }) => {
+type Props = {
+  positions: Array<number | undefined>;
+};
+
+const Board = ({ positions }: Props) => {
   const isBoardActive = useStore((state) => state.isBoardActive);
 
   return (
@@ -12,18 +16,18 @@ const Board = ({ positions }) => {
       {positions
         .map((id, index) => ({ id, index }))
         .filter(({ id }) => id !== undefined)
-        .sort((a, b) => a.id - b.id)
+        .sort((a, b) => a.id! - b.id!)
         .map(({ id, index }) => {
           let rowIndex = Math.floor(index / BOARD_COLUMNS);
           let columnIndex = index % BOARD_COLUMNS;
 
-          return <Tile key={id} id={id} row={rowIndex} column={columnIndex} />;
+          return <Tile key={id} id={id!} row={rowIndex} column={columnIndex} />;
         })}
     </StyledBoard>
   );
 };
 
-const StyledBoard = styled.main<{ isBoardActive }>`
+const StyledBoard = styled.main<{ isBoardActive: boolean }>`
   pointer-events: ${({ isBoardActive }) => (isBoardActive ? "auto" : "none")};
   position: relative;
   width: calc(${TILE_SIZE["small"]} * 4);

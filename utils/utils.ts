@@ -3,7 +3,7 @@ import { BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS } from "../constants/constants";
 const randomFromArr = (array: Array<any>) =>
   array[Math.floor(Math.random() * array.length)];
 
-export const moveRandomPosition = (positions: Array<object | undefined>) => {
+export const moveRandomPosition = (positions: Array<number | undefined>) => {
   const startDestinationSearchFromEnd = Math.random() < 0.5;
   let destinationIndex: number;
   let sourceIndices: Array<number> = [];
@@ -58,7 +58,7 @@ export const moveRandomPosition = (positions: Array<object | undefined>) => {
   return newPositions;
 };
 
-export const shuffleArray = (array) => {
+export const shuffleArray = (array: Array<any>) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];

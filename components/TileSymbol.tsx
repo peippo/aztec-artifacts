@@ -10,14 +10,24 @@ import pyramid from "../assets/images/symbol-pyramid.svg";
 import snake from "../assets/images/symbol-snake.svg";
 import turtle from "../assets/images/symbol-turtle.svg";
 
-const TileSymbol = ({ id, status, isMatched }) => {
+type Props = {
+  tileId: number;
+  status: TransitionStatus;
+  isMatched: boolean;
+};
+
+type Symbols = {
+  [key: string]: React.SVGProps<SVGSVGElement>;
+};
+
+const TileSymbol = ({ tileId, status, isMatched }: Props) => {
   const matchedTiles = useStore((state) => state.matchedTiles);
   const revealedTiles = useStore((state) => state.revealedTiles);
   const { symbol } = isMatched
-    ? matchedTiles.find((tile) => tile.id === id) || {}
-    : revealedTiles.find((tile) => tile.id === id) || {};
+    ? matchedTiles.find((tile) => tile.id === tileId) || {}
+    : revealedTiles.find((tile) => tile.id === tileId) || {};
 
-  const symbols = {
+  const symbols: Symbols = {
     A: bird(),
     B: face(),
     C: lizard(),

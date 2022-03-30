@@ -1,29 +1,43 @@
-// You can include shared interfaces/types in a separate file
-// and then use them in any component by importing them. For
-// example, to import the interface below do:
-//
-// import { User } from 'path/to/interfaces';
-
-export type User = {
-  id: number;
-  name: string;
-};
-
-export type BoardPositions = {
-  [index: number]: number | undefined;
-};
-
-export type BoardType = {
-  positions: BoardPositions[];
-};
-
-// export interface BoardRow {
-//   [index: number]: number | undefined;
-// }
-
-export type TileType = {
-  id: string;
+export interface TileType {
+  tileId: number;
   row: number;
   column: number;
   status: string | null;
-};
+}
+
+export interface GameStore {
+  gameId: string;
+  currentTurn: number;
+  isBoardActive: boolean;
+  currentTileIds: Array<number>;
+  revealedTiles: {
+    id: number;
+    symbol: string;
+  }[];
+  matchedTiles: {
+    id: number;
+    symbol: string;
+  }[];
+  isFadingOutSymbol: boolean;
+  positions: Array<number | undefined>;
+  startNewGame: () => void;
+  resetGame: () => void;
+  isRevealed: (id: number) => boolean;
+  isMatched: (id: number) => boolean;
+  moveRandom: () => void;
+  checkTile: (id: number) => void;
+}
+
+export interface NewGameResponse {
+  id: string;
+}
+
+export interface CheckResponse {
+  revealedTiles: {
+    id: number;
+    symbol: string;
+  }[];
+  isMatch: boolean;
+  isFirst: boolean;
+  turn: number;
+}
