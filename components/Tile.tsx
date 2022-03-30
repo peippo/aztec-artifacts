@@ -65,26 +65,26 @@ const Tile = ({ id, row, column }: Props) => {
 
 const StyledTile = styled.button<TileType>`
   position: absolute;
-  top: ${(props) => `calc(${props.row} * ${TILE_SIZE["small"]})`};
-  left: ${(props) => `calc(${props.column} * ${TILE_SIZE["small"]})`};
+  top: ${({ row }) => `calc(${row} * ${TILE_SIZE["small"]})`};
+  left: ${({ column }) => `calc(${column} * ${TILE_SIZE["small"]})`};
   width: ${TILE_SIZE["small"]};
   height: ${TILE_SIZE["small"]};
   border: 0;
   transition: all 0.25s ease-out;
   background-color: transparent;
-  background-image: ${(props) => `url("tile-${parseInt(props.id) % 3}.svg")`};
+  background-image: ${({ tileId }) => `url("tile-${tileId % 3}.svg")`};
   color: var(--color-dark-blue);
 
   @media (min-width: ${BREAKPOINT["medium"]}) {
-    top: ${(props) => `calc(${props.row} * ${TILE_SIZE["medium"]})`};
-    left: ${(props) => `calc(${props.column} * ${TILE_SIZE["medium"]})`};
+    top: ${({ row }) => `calc(${row} * ${TILE_SIZE["medium"]})`};
+    left: ${({ column }) => `calc(${column} * ${TILE_SIZE["medium"]})`};
     width: ${TILE_SIZE["medium"]};
     height: ${TILE_SIZE["medium"]};
   }
 
   @media (min-width: ${BREAKPOINT["large"]}) {
-    top: ${(props) => `calc(${props.row} * ${TILE_SIZE["large"]})`};
-    left: ${(props) => `calc(${props.column} * ${TILE_SIZE["large"]})`};
+    top: ${({ row }) => `calc(${row} * ${TILE_SIZE["large"]})`};
+    left: ${({ column }) => `calc(${column} * ${TILE_SIZE["large"]})`};
     width: ${TILE_SIZE["large"]};
     height: ${TILE_SIZE["large"]};
   }
