@@ -18,6 +18,7 @@ export interface GameStore {
     id: number;
     symbol: string;
   }[];
+  isCompleted: boolean;
   isFadingOutSymbol: boolean;
   positions: Array<number | undefined>;
   startNewGame: () => void;

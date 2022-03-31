@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "../constants/constants";
 import useStore from "../hooks/useStore";
@@ -10,6 +10,23 @@ type Props = {
 
 const Board = ({ positions }: Props) => {
   const isBoardActive = useStore((state) => state.isBoardActive);
+  const isCompleted = useStore((state) => state.isCompleted);
+  const moveRandom = useStore((state) => state.moveRandom);
+
+  // Start moving tiles randomly when the board is completed
+  const intervalRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (isCompleted) {
+      intervalRef.current = window.setInterval(moveRandom, 1000);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isCompleted]);
 
   return (
     <StyledBoard isBoardActive={isBoardActive}>

@@ -1,5 +1,5 @@
 import create from "zustand";
-import { INITIAL_BOARD_POSITIONS } from "../constants/constants";
+import { INITIAL_BOARD_POSITIONS, TILE_PAIRS } from "../constants/constants";
 import { moveRandomPosition, shuffleArray } from "../utils/utils";
 import { GameStore, NewGameResponse, CheckResponse } from "../interfaces";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -11,6 +11,7 @@ const initialSettings = {
   currentTileIds: [],
   revealedTiles: [],
   matchedTiles: [],
+  isCompleted: false,
   isFadingOutSymbol: false,
   positions: INITIAL_BOARD_POSITIONS,
 };
@@ -25,9 +26,6 @@ const useStore = create<GameStore>((set, get) => ({
       gameId: id,
       currentTurn: 1,
       isBoardActive: true,
-      currentTileIds: [],
-      revealedTiles: [],
-      matchedTiles: [],
       positions: shuffleArray([...INITIAL_BOARD_POSITIONS]),
     });
   },
@@ -71,6 +69,7 @@ const useStore = create<GameStore>((set, get) => ({
       setTimeout(() => {
         set((state) => ({
           matchedTiles: [...revealedTiles, ...state.matchedTiles],
+          isCompleted: state.matchedTiles.length === TILE_PAIRS * 2 - 2, // Matching last pair
         }));
       }, 1000);
     }
