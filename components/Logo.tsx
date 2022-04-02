@@ -1,7 +1,6 @@
-import * as React from "react";
-import Link from "next/link";
 import styled from "styled-components";
-import { BREAKPOINT } from "../constants/constants";
+import Link from "next/link";
+import { BREAKPOINT } from "@/constants";
 
 const Logo = () => (
   <Link href="/">

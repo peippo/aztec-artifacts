@@ -1,7 +1,7 @@
 import create from "zustand";
-import { INITIAL_BOARD_POSITIONS, TILE_PAIRS } from "../constants/constants";
-import { moveRandomPosition, shuffleArray } from "../utils/utils";
-import { GameStore, NewGameResponse, CheckResponse } from "../interfaces";
+import { INITIAL_BOARD_POSITIONS, TILE_PAIRS } from "@/constants";
+import { moveRandomPosition, shuffleArray } from "@/utils";
+import { GameStore, NewGameResponse, CheckResponse } from "@/interfaces";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const initialSettings = {

@@ -1,6 +1,5 @@
-import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import { BREAKPOINT } from "../constants/constants";
+import { BREAKPOINT } from "@/constants";
 
 const Vines = () => (
   <>

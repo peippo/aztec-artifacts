@@ -1,7 +1,6 @@
-import * as React from "react";
 import styled from "styled-components";
-import useStore from "../hooks/useStore";
-import { BREAKPOINT } from "../constants/constants";
+import useStore from "hooks/useStore";
+import { BREAKPOINT } from "@/constants";
 
 const TurnIndicator = () => {
   const currentTurn = useStore((state) => state.currentTurn);

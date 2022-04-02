@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "../constants/constants";
-import useStore from "../hooks/useStore";
-import Tile from "../components/Tile";
+import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "@/constants";
+import useStore from "hooks/useStore";
+import Tile from "components/Tile";
 
 type Props = {
   positions: Array<number | undefined>;

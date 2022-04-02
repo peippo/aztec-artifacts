@@ -1,10 +1,9 @@
-import React, { ReactNode } from "react";
-import styled from "styled-components";
+import { ReactNode } from "react";
+import styled, { createGlobalStyle } from "styled-components";
 import Head from "next/head";
-import { createGlobalStyle } from "styled-components";
-import Vines from "./Vines";
-import Logo from "../components/Logo";
-import TurnIndicator from "../components/TurnIndicator";
+import Vines from "components/Vines";
+import Logo from "components/Logo";
+import TurnIndicator from "components/TurnIndicator";
 
 type Props = {
   children?: ReactNode;

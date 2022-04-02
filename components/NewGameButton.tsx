@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
 import styled from "styled-components";
-import { TILE_SIZE, BREAKPOINT } from "../constants/constants";
+import Link from "next/link";
+import { TILE_SIZE, BREAKPOINT } from "@/constants";
 
 const NewGameButton = () => {
   return (

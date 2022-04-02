@@ -1,4 +1,4 @@
-import { BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS } from "../constants/constants";
+import { BOARD_COLUMNS, BOARD_ROWS, BOARD_CELLS } from "@/constants";
 
 const randomFromArr = (array: Array<any>) =>
   array[Math.floor(Math.random() * array.length)];

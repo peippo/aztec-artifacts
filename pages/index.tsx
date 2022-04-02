@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import Board from "../components/Board";
-import NewGameButton from "../components/NewGameButton";
-import useStore from "../hooks/useStore";
+import useStore from "hooks/useStore";
+import { GameStore } from "@/interfaces";
+import Board from "components/Board";
+import NewGameButton from "components/NewGameButton";
 
 const IndexPage = () => {
   const resetGame = useStore((state) => state.resetGame);

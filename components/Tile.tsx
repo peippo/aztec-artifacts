@@ -1,11 +1,10 @@
-import React from "react";
 import styled, { keyframes, css } from "styled-components";
-import { TileType } from "../interfaces";
-import { TILE_SIZE, BREAKPOINT } from "../constants/constants";
-import useStore from "../hooks/useStore";
-import TileSymbol from "./TileSymbol";
+import useStore from "hooks/useStore";
+import { TileType } from "@/interfaces";
+import { TILE_SIZE, BREAKPOINT } from "@/constants";
 import { Transition } from "react-transition-group";
 import { TransitionStatus } from "react-transition-group/Transition";
+import TileSymbol from "components/TileSymbol";
 
 type Props = {
   id: number;
