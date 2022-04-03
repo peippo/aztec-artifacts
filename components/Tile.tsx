@@ -1,6 +1,7 @@
+import { useCallback } from "react";
 import styled, { keyframes, css } from "styled-components";
 import useStore from "hooks/useStore";
-import { TileType } from "@/interfaces";
+import { GameStore, TileType } from "@/interfaces";
 import { TILE_SIZE, BREAKPOINT } from "@/constants";
 import { Transition } from "react-transition-group";
 import { TransitionStatus } from "react-transition-group/Transition";
@@ -12,11 +13,16 @@ type Props = {
   column: number;
 };
 
+const checkTileSelector = (state: GameStore) => state.checkTile;
+const isFadingOutSymbolSelector = (state: GameStore) => state.isFadingOutSymbol;
+
 const Tile = ({ id, row, column }: Props) => {
-  const handleCheckTile = useStore((state) => state.checkTile);
-  const isRevealed = useStore((state) => state.isRevealed(id));
-  const isMatched = useStore((state) => state.isMatched(id));
-  const isFadingOutSymbol = useStore((state) => state.isFadingOutSymbol);
+  const handleCheckTile = useStore(checkTileSelector);
+  const isFadingOutSymbol = useStore(isFadingOutSymbolSelector);
+  const isRevealed = useStore(
+    useCallback((state) => state.isRevealed(id), [id])
+  );
+  const isMatched = useStore(useCallback((state) => state.isMatched(id), [id]));
 
   return (
     <>

@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import useStore from "hooks/useStore";
+import { GameStore } from "@/interfaces";
 import { BREAKPOINT } from "@/constants";
 
+const currentTurnSelector = (state: GameStore) => state.currentTurn;
+
 const TurnIndicator = () => {
-  const currentTurn = useStore((state) => state.currentTurn);
+  const currentTurn = useStore(currentTurnSelector);
 
   if (!currentTurn) return <></>;
 

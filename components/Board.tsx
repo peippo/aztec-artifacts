@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "@/constants";
+import { GameStore } from "@/interfaces";
 import useStore from "hooks/useStore";
 import Tile from "components/Tile";
 
@@ -8,10 +9,14 @@ type Props = {
   positions: Array<number | undefined>;
 };
 
+const isBoardActiveSelector = (state: GameStore) => state.isBoardActive;
+const isCompletedSelector = (state: GameStore) => state.isCompleted;
+const moveRandomSelector = (state: GameStore) => state.moveRandom;
+
 const Board = ({ positions }: Props) => {
-  const isBoardActive = useStore((state) => state.isBoardActive);
-  const isCompleted = useStore((state) => state.isCompleted);
-  const moveRandom = useStore((state) => state.moveRandom);
+  const isBoardActive = useStore(isBoardActiveSelector);
+  const isCompleted = useStore(isCompletedSelector);
+  const moveRandom = useStore(moveRandomSelector);
 
   // Start moving tiles randomly when the board is completed
   const intervalRef = useRef<number | null>(null);

@@ -1,5 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 import useStore from "hooks/useStore";
+import { GameStore } from "@/interfaces";
 import { TransitionStatus } from "react-transition-group/Transition";
 import bird from "@/images/symbol-bird.svg";
 import face from "@/images/symbol-face.svg";
@@ -19,9 +20,12 @@ type Symbols = {
   [key: string]: React.SVGProps<SVGSVGElement>;
 };
 
+const matchedTilesSelector = (state: GameStore) => state.matchedTiles;
+const revealedTilesSelector = (state: GameStore) => state.revealedTiles;
+
 const TileSymbol = ({ tileId, status, isMatched }: Props) => {
-  const matchedTiles = useStore((state) => state.matchedTiles);
-  const revealedTiles = useStore((state) => state.revealedTiles);
+  const matchedTiles = useStore(matchedTilesSelector);
+  const revealedTiles = useStore(revealedTilesSelector);
   const { symbol } = isMatched
     ? matchedTiles.find((tile) => tile.id === tileId) || {}
     : revealedTiles.find((tile) => tile.id === tileId) || {};

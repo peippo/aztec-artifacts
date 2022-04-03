@@ -3,9 +3,12 @@ import Board from "components/Board";
 import useStore from "hooks/useStore";
 import { GameStore } from "@/interfaces";
 
+const startNewGameSelector = (state: GameStore) => state.startNewGame;
+const positionsSelector = (state: GameStore) => state.positions;
+
 const GamePage = () => {
-  const startNewGame = useStore((state) => state.startNewGame);
-  const positions = useStore((state) => state.positions);
+  const startNewGame = useStore(startNewGameSelector);
+  const positions = useStore(positionsSelector);
 
   useEffect(() => {
     startNewGame();

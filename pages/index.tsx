@@ -5,9 +5,12 @@ import { GameStore } from "@/interfaces";
 import Board from "components/Board";
 import NewGameButton from "components/NewGameButton";
 
+const resetGameSelector = (state: GameStore) => state.resetGame;
+const positionsSelector = (state: GameStore) => state.positions;
+
 const IndexPage = () => {
-  const resetGame = useStore((state) => state.resetGame);
-  const positions = useStore((state) => state.positions);
+  const resetGame = useStore(resetGameSelector);
+  const positions = useStore(positionsSelector);
 
   useEffect(() => {
     resetGame();
