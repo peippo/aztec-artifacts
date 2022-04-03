@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Head from "next/head";
+import { BREAKPOINT } from "@/constants";
 import Vines from "components/Vines";
 import Logo from "components/Logo";
 import TurnIndicator from "components/TurnIndicator";
@@ -41,6 +42,19 @@ const GlobalStyle = createGlobalStyle`
     --color-white: #fff9db;
     --font-family: 'Rubik', sans-serif;
     --cursor-url: url("cursor.png");
+    --tile-size: 80px;
+  }
+
+  @media (min-width: ${BREAKPOINT["medium"]}) {
+    :root {
+      --tile-size: 100px;
+    }
+  }
+
+  @media (min-width: ${BREAKPOINT["large"]}) {
+    :root {
+      --tile-size: 120px;
+    }
   }
 
 	html {

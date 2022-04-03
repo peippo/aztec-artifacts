@@ -2,11 +2,6 @@ const BREAKPOINT = {
   medium: "600px",
   large: "800px",
 };
-const TILE_SIZE = {
-  small: "80px",
-  medium: "100px",
-  large: "120px",
-};
 const BOARD_COLUMNS = 4;
 const BOARD_ROWS = 4;
 const BOARD_CELLS = BOARD_COLUMNS * BOARD_ROWS;
@@ -31,7 +26,6 @@ const INITIAL_BOARD_POSITIONS = [
 ];
 
 export {
-  TILE_SIZE,
   BOARD_COLUMNS,
   BOARD_ROWS,
   BOARD_CELLS,

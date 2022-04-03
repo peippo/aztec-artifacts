@@ -1,8 +1,14 @@
+import { TransitionStatus } from "react-transition-group/Transition";
+
 export interface TileType {
   tileId: number;
   row: number;
   column: number;
   status: string | null;
+}
+
+export interface TransitionedTileType extends TileType {
+  status: TransitionStatus;
 }
 
 export interface GameStore {

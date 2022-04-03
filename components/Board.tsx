@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { BOARD_COLUMNS, TILE_SIZE, BREAKPOINT } from "@/constants";
+import { BOARD_COLUMNS } from "@/constants";
 import { GameStore } from "@/interfaces";
 import useStore from "hooks/useStore";
 import Tile from "components/Tile";
@@ -52,18 +52,8 @@ const Board = ({ positions }: Props) => {
 const StyledBoard = styled.main<{ isBoardActive: boolean }>`
   pointer-events: ${({ isBoardActive }) => (isBoardActive ? "auto" : "none")};
   position: relative;
-  width: calc(${TILE_SIZE["small"]} * 4);
-  height: calc(${TILE_SIZE["small"]} * 4);
-
-  @media (min-width: ${BREAKPOINT["medium"]}) {
-    width: calc(${TILE_SIZE["medium"]} * 4);
-    height: calc(${TILE_SIZE["medium"]} * 4);
-  }
-
-  @media (min-width: ${BREAKPOINT["large"]}) {
-    width: calc(${TILE_SIZE["large"]} * 4);
-    height: calc(${TILE_SIZE["large"]} * 4);
-  }
+  width: calc(var(--tile-size) * 4);
+  height: calc(var(--tile-size) * 4);
 `;
 
 export default Board;

@@ -1,8 +1,7 @@
 import { useCallback } from "react";
 import styled, { keyframes, css } from "styled-components";
 import useStore from "hooks/useStore";
-import { GameStore, TileType } from "@/interfaces";
-import { TILE_SIZE, BREAKPOINT } from "@/constants";
+import { GameStore, TileType, TransitionedTileType } from "@/interfaces";
 import { Transition } from "react-transition-group";
 import { TransitionStatus } from "react-transition-group/Transition";
 import TileSymbol from "components/TileSymbol";
@@ -70,29 +69,16 @@ const Tile = ({ id, row, column }: Props) => {
 
 const StyledTile = styled.button<TileType>`
   position: absolute;
-  top: ${({ row }) => `calc(${row} * ${TILE_SIZE["small"]})`};
-  left: ${({ column }) => `calc(${column} * ${TILE_SIZE["small"]})`};
-  width: ${TILE_SIZE["small"]};
-  height: ${TILE_SIZE["small"]};
   border: 0;
   transition: all 0.25s ease-out;
   background-color: transparent;
   background-image: ${({ tileId }) => `url("tile-${tileId % 3}.svg")`};
   color: var(--color-dark-blue);
-
-  @media (min-width: ${BREAKPOINT["medium"]}) {
-    top: ${({ row }) => `calc(${row} * ${TILE_SIZE["medium"]})`};
-    left: ${({ column }) => `calc(${column} * ${TILE_SIZE["medium"]})`};
-    width: ${TILE_SIZE["medium"]};
-    height: ${TILE_SIZE["medium"]};
-  }
-
-  @media (min-width: ${BREAKPOINT["large"]}) {
-    top: ${({ row }) => `calc(${row} * ${TILE_SIZE["large"]})`};
-    left: ${({ column }) => `calc(${column} * ${TILE_SIZE["large"]})`};
-    width: ${TILE_SIZE["large"]};
-    height: ${TILE_SIZE["large"]};
-  }
+  transform: ${({ row, column }) =>
+    `translate3d(calc(${column} * var(--tile-size)), 
+      calc(${row} * var(--tile-size)), 0px)`};
+  width: var(--tile-size);
+  height: var(--tile-size);
 
   svg {
     max-width: 75%;
@@ -101,44 +87,57 @@ const StyledTile = styled.button<TileType>`
 
   &:hover {
     opacity: 0.85;
-    transform: scale(0.98);
     cursor: var(--cursor-url), pointer;
+    transform: ${({ row, column }) =>
+      `translate3d(calc(${column} * var(--tile-size)), 
+        calc(${row} * var(--tile-size)), 0px) scale(0.98)`};
   }
 `;
 
-const RevealedTile = styled(StyledTile)<{ status: TransitionStatus }>`
-  &:hover {
-    opacity: inherit;
-    transform: inherit;
-    cursor: inherit;
-  }
-
+const RevealedTile = styled(StyledTile)<TransitionedTileType>`
   ${({ status }) =>
     status === "entering" &&
     css`
       z-index: 10;
     `}
 
-  ${({ status }) =>
-    (status === "entering" || status === "entered") &&
+  ${({ status, row, column }) =>
+    status === "entering" &&
     css`
-      animation-name: ${revealInAnimation};
+      animation-name: ${revealInAnimation(row, column)};
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
     `}
+
+  &:hover {
+    opacity: inherit;
+    cursor: inherit;
+    transform: ${({ row, column }) =>
+      `translate3d(calc(${column} * var(--tile-size)), 
+        calc(${row} * var(--tile-size)), 0px)`};
+  }
 `;
 
-const revealInAnimation = keyframes`
+const revealInAnimation = (row: number, column: number) => keyframes`
   0% {
-    transform: scale(1);
+    transform: ${(() => {
+      return `translate3d(calc(${column} * var(--tile-size)), 
+        calc(${row} * var(--tile-size)), 0px) scale(1)`;
+    })()};
     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
   80% {
-    transform: scale(1.2);
+    transform: ${(() => {
+      return `translate3d(calc(${column} * var(--tile-size)), 
+        calc(${row} * var(--tile-size)), 0px) scale(1.2)`;
+    })()};
     box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.5);
   }
   100% {
-    transform: scale(1);
+    transform: ${(() => {
+      return `translate3d(calc(${column} * var(--tile-size)), 
+        calc(${row} * var(--tile-size)), 0px) scale(1)`;
+    })()};
     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
 `;
