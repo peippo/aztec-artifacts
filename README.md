@@ -1,4 +1,4 @@
-# Aztec Artifacts
+<img src="https://aztec-artifacts.vercel.app/banner.png" alt="Banner image">
 
 A memory game w/ Typescript, Next.js, zustand & styled-components.
 
