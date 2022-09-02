@@ -16,7 +16,7 @@ const GamePage = () => {
 
   useEffect(() => {
     startNewGame();
-  }, []);
+  }, [startNewGame]);
 
   return (
     <Wrapper>

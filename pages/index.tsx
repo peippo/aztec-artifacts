@@ -14,7 +14,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     resetGame();
-  }, []);
+  }, [resetGame]);
 
   return (
     <Wrapper>

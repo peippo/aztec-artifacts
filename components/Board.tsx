@@ -31,7 +31,7 @@ const Board = ({ positions }: Props) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isCompleted]);
+  }, [moveRandom, isCompleted]);
 
   return (
     <StyledBoard isBoardActive={isBoardActive}>
