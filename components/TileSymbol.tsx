@@ -17,7 +17,7 @@ type Props = {
 };
 
 type Symbols = {
-  [key: string]: React.SVGProps<SVGSVGElement>;
+  [key: string]: any; // Use 'any' to avoid conflicts with '@svgr/webpack' plugin or 'babel-plugin-inline-react-svg' plugin.
 };
 
 const matchedTilesSelector = (state: GameStore) => state.matchedTiles;
